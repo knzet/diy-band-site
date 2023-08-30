@@ -1,3 +1,3 @@
 node_modules/*
 .env
-.next/*
+.next/**/* # Next.js static build output
