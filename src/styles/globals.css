@@ -1,3 +1,74 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.orange {
+  color: #f9a03fff;
+}
+.jasmine {
+  color: #f7d488ff;
+}
+.cream {
+  color: #eaefb1ff;
+}
+.nyanza {
+  color: #e9f7caff;
+}
+.dogwood {
+  color: #ceb5a7ff;
+}
+
+.orange-bg {
+  background-color: #f9a03fff;
+}
+.jasmine-bg {
+  background-color: #f7d488ff;
+}
+.cream-bg {
+  background-color: #eaefb1ff;
+}
+.nyanza-bg {
+  background-color: #e9f7caff;
+}
+.dogwood-bg {
+  background-color: #ceb5a7ff;
+}
+.orange-bg-hover:hover {
+  background-color: #f9a03fff;
+}
+.jasmine-bg-hover:hover {
+  background-color: #f7d488ff;
+}
+.cream-bg-hover:hover {
+  background-color: #eaefb1ff;
+}
+.nyanza-bg-hover:hover {
+  background-color: #e9f7caff;
+}
+.dogwood-bg-hover:hover {
+  background-color: #ceb5a7ff;
+}
+.orange-hover:hover {
+  color: #f9a03fff;
+}
+.jasmine-hover:hover {
+  color: #f7d488ff;
+}
+.cream-hover:hover {
+  color: #eaefb1ff;
+}
+.nyanza-hover:hover {
+  color: #e9f7caff;
+}
+.dogwood-hover:hover {
+  color: #ceb5a7ff;
+}
+.gradient-top {
+  background: linear-gradient(
+    0deg,
+    #f9a03fff,
+    #f7d488ff,
+    #eaefb1ff,
+    #e9f7caff,
+    #ceb5a7ff
+  );
+}
