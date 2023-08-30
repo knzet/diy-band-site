@@ -8,7 +8,7 @@ import remarkGfm from "remark-gfm";
 export default function BlogPost() {
   const router = useRouter();
   const { data: post, isLoading } = api.blogPost.getOne.useQuery({
-    id: router.query?.id?.[0],
+    id: router.query?.id?.[0] as string,
   });
   return (
     <main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-[#fff822] to-[#e8bd49]">
