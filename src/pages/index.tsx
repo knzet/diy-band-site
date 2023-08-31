@@ -48,7 +48,7 @@ export default function Home() {
       {
         name: "Booking Email",
         url: "mailto:safetybreakroc@gmail.com",
-        icon: <IconMail size={40}/>
+        icon: <IconMail size={40} />,
       },
     ]);
   }, []);
@@ -74,13 +74,7 @@ export default function Home() {
                   //  className={utilStyles.list}
                   >
                     {links.map(({ name, url, icon }) => (
-                      <li
-                        // className={classnames([
-                        //   utilStyles.listItem,
-                        //   utilStyles.moveOnHover,
-                        // ])}
-                        key={name}
-                      >
+                      <li className={"moveOnHover"} key={name}>
                         <Link
                           className="nyanza-bg dogwood my-3 flex max-w-xs flex-col gap-4 rounded-xl p-4 text-white hover:bg-white/20"
                           href={url}
@@ -113,7 +107,11 @@ export default function Home() {
                     {allPosts
                       ?.sort((a, b) => (a.date > b.date ? -1 : 1))
                       .map((post: BlogPostType) => {
-                        return <BlogPostCard post={post} />;
+                        return (
+                          <div className={"moveOnHover"}>
+                            <BlogPostCard post={post} />
+                          </div>
+                        );
                       })}
                   </div>
                 )}

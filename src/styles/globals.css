@@ -72,3 +72,8 @@
     #ceb5a7ff
   );
 }
+.moveOnHover:hover {
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(10px);
+  color: rgb(152, 145, 194);
+}
