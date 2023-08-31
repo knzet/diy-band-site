@@ -22,7 +22,7 @@ export default function Layout({
           links={{
             public: [
               { link: "/", label: "home" },
-              { link: "blog", label: "blog" },
+              { link: "/blog", label: "blog" },
             ],
             private: [{ link: "admin", label: "admin" }],
           }}

@@ -1,23 +1,46 @@
+import { Modal, Button } from "@mantine/core";
 import { BlogPost } from "@prisma/client";
+import { IconPencil, IconTrash } from "@tabler/icons-react";
 import moment from "moment";
 import Link from "next/link";
+import { useState } from "react";
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-export default function BlogPostCard({ post }: { post: BlogPost }) {
+import { api } from "~/utils/api";
+import EditBlogPostForm from "./Form/EditBlogPostForm";
+import DeleteBlogPostForm from "./Form/DeleteBlogPostForm";
+export default function BlogPostCard({
+  post,
+  admin,
+}: {
+  post: BlogPost;
+  admin?: boolean;
+}) {
+  
+  const charLimit = 200;
   return (
-    <Link href={`/blog/post/${post.id}`}>
-      <div className={"cream-bg m-6 rounded-md p-2"}>
-        <h3 className="dogwood flex max-w-xs flex-col gap-4 rounded-xl p-4 text-2xl font-extrabold text-white hover:bg-white/20">
+    <div className={"cream-bg m-6 rounded-md p-2 hover:bg-white/20"}>
+      {admin && (
+        <div className={'mx-2'}>
+          <EditBlogPostForm post={post}/>
+          <DeleteBlogPostForm post={post}/>
+        </div>
+      )}
+      <Link href={`/blog/post/${post.id}`}>
+        <h3 className="dogwood flex max-w-xs flex-col gap-4 rounded-xl p-4 text-2xl font-extrabold text-white ">
           {post.title}
         </h3>
         <h2>{moment(post?.date).fromNow()}</h2>
         <ReactMarkdown
           className={"text-slate-700"}
-          children={post.content.substring(0, 200) + "..."}
+          children={
+            post.content.substring(0, charLimit) +
+            (post.content.length > charLimit ? "..." : "")
+          }
           remarkPlugins={[remarkGfm]}
         />
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
