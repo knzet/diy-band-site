@@ -107,8 +107,15 @@ export const createTRPCRouter = t.router;
 export const publicProcedure = t.procedure;
 
 /** Reusable middleware that enforces users are logged in before running the procedure. */
-const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
+const enforceUserIsAdmin = t.middleware(({ ctx, next }) => {
   if (!ctx.session?.user) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+  const user = ctx.prisma.user.findUnique({
+    where: { id: ctx.session.user.id },
+  });
+  const { role } = user;
+  if (role.name !== "ADMIN") {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
   return next({
@@ -127,4 +134,4 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
  *
  * @see https://trpc.io/docs/procedures
  */
-export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
+export const protectedProcedure = t.procedure.use(enforceUserIsAdmin);

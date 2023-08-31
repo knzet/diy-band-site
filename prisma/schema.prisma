@@ -52,9 +52,17 @@ model User {
     name          String?
     email         String?   @unique
     emailVerified DateTime?
+    role          UserRole? @relation(fields: [userRoleId], references: [id])
     image         String?
     accounts      Account[]
     sessions      Session[]
+    userRoleId    String?
+}
+
+model UserRole {
+    id   String @id @default(cuid()) @map("_id") // This is necessary for MongoDB
+    name String @unique
+    User User[]
 }
 
 model VerificationToken {
@@ -67,8 +75,8 @@ model VerificationToken {
 }
 
 model BlogPost {
-    id String @id @default(cuid()) @map("_id") // This is necessary for MongoDB
-    title String
+    id      String   @id @default(cuid()) @map("_id") // This is necessary for MongoDB
+    title   String
     content String
-    date DateTime
+    date    DateTime
 }

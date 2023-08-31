@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { getSession, signIn, signOut, useSession } from "next-auth/react";
+import { type Session } from "next-auth";
 
 import {
   createStyles,
@@ -21,31 +22,6 @@ import {
 import Link from "next/link";
 import { api } from "~/utils/api";
 import SignInButton from "./SignInButton";
-// function AuthShowcase() {
-//   const { data: sessionData } = useSession();
-
-//   const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-//     undefined, // no input
-//     { enabled: sessionData?.user !== undefined }
-//   );
-
-//   return (
-//     <>
-//       <div className="flex flex-col items-center justify-center gap-4">
-//         <p className="text-center text-2xl text-white">
-//           {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-//           {/* {secretMessage && <span> - {secretMessage}</span>} */}
-//         </p>
-//         <button
-//           className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-//           onClick={sessionData ? () => void signOut() : () => void signIn()}
-//         >
-//           {sessionData ? "Sign out" : "Sign in"}
-//         </button>
-//       </div>
-//     </>
-//   );
-// }
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -118,15 +94,18 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeaderMiddleProps {
-  links: { link: string; label: string }[];
+  links: {
+    public: { link: string; label: string }[];
+    private?: { link: string; label: string }[];
+  };
 }
 
 export function HeaderMiddle({ links }: HeaderMiddleProps) {
   const [opened, { toggle }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0]?.link);
+  const [active, setActive] = useState(links.public[0]?.link);
+  const { data: me } = api.user.me.useQuery();
   const { classes, cx } = useStyles();
-
-  const items = links.map((link) => (
+  const items = links.public.map((link) => (
     <Link
       href={link.link}
       key={link.label}
@@ -143,6 +122,8 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
     </Link>
   ));
 
+  const adminLink = { link: "/admin", label: "admin" };
+
   return (
     <Header height={56} className={"jasmine-bg"}>
       <Container className={classes.inner}>
@@ -154,6 +135,22 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
         />
         <Group className={classes.links} spacing={5}>
           {items}
+          {me?.role?.name === "ADMIN" && (
+            <Link
+              href={"admin"}
+              key={adminLink.label}
+              className={cx(classes.link, {
+                "nyanza-bg-hover": active === adminLink.link,
+                "nyanza-bg dogwood cream-bg-hover": true,
+              })}
+              onClick={(event) => {
+                // event.preventDefault();
+                setActive(adminLink.link);
+              }}
+            >
+              {adminLink.label}
+            </Link>
+          )}
         </Group>
 
         {/* <Image src="/images/SB-logo.png" height={30} width={100} alt="" /> */}
