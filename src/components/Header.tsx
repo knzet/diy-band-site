@@ -133,6 +133,27 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
           size="sm"
           className={classes.burger}
         />
+        {opened && (
+          <Group className={''} spacing={5}>
+            {items}
+            {me?.role?.name === "ADMIN" && (
+              <Link
+                href={"admin"}
+                key={adminLink.label}
+                className={cx(classes.link, {
+                  "nyanza-bg-hover": active === adminLink.link,
+                  "nyanza-bg dogwood cream-bg-hover": true,
+                })}
+                onClick={(event) => {
+                  // event.preventDefault();
+                  setActive(adminLink.link);
+                }}
+              >
+                {adminLink.label}
+              </Link>
+            )}
+          </Group>
+        )}
         <Group className={classes.links} spacing={5}>
           {items}
           {me?.role?.name === "ADMIN" && (
