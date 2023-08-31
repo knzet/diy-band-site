@@ -5,11 +5,20 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { api } from "~/utils/api";
 import { type BlogPost as BlogPostType } from "@prisma/client";
-import { IconArrowDown } from '@tabler/icons-react';
+import {
+  IconArrowDown,
+  IconBrandBandcamp,
+  IconBrandSoundcloud,
+  IconBrandSpotify,
+  IconBrandYoutube,
+  IconMail,
+} from "@tabler/icons-react";
 import BlogPostCard from "~/components/BlogPostCard";
 
 export default function Home() {
-  const [links, setLinks] = useState<{ name: string; url: string }[]>([]);
+  const [links, setLinks] = useState<
+    { name: string; url: string; icon?: JSX.Element }[]
+  >([]);
   const { data: allPosts, isLoading } = api.blogPost.getAll.useQuery();
 
   useEffect(() => {
@@ -17,22 +26,29 @@ export default function Home() {
       {
         name: "Spotify",
         url: "https://open.spotify.com/artist/61SB4Zoq6xmsImJQoxUDk3?si=JFzCJt3dTTaTbB2cmjdsnQ",
+
+        icon: <IconBrandSpotify size={45} />,
       },
       {
         name: "Bandcamp (new releases earlier than spotify)",
         url: "https://safetybreak.bandcamp.com/",
+
+        icon: <IconBrandBandcamp size={70} />,
       },
       {
         name: "Soundcloud (for live recordings)",
         url: "https://soundcloud.com/safety-break",
+        icon: <IconBrandSoundcloud size={60} />,
       },
       {
         name: "Youtube",
         url: "https://www.youtube.com/@safetybreakroc",
+        icon: <IconBrandYoutube size={45} />,
       },
       {
         name: "Booking Email",
         url: "mailto:safetybreakroc@gmail.com",
+        icon: <IconMail size={40}/>
       },
     ]);
   }, []);
@@ -57,7 +73,7 @@ export default function Home() {
                   <ul
                   //  className={utilStyles.list}
                   >
-                    {links.map(({ name, url }) => (
+                    {links.map(({ name, url, icon }) => (
                       <li
                         // className={classnames([
                         //   utilStyles.listItem,
@@ -70,7 +86,10 @@ export default function Home() {
                           href={url}
                           target="_blank"
                         >
-                          <h3 className="text-2xl font-bold">{name} →</h3>
+                          <h3 className="flex flex-none items-center justify-between text-2xl font-bold">
+                            {name} {!icon && "→"}
+                            {icon && icon}
+                          </h3>
                         </Link>
                       </li>
                     ))}
@@ -83,7 +102,10 @@ export default function Home() {
 
             <div className="flex flex-col items-center gap-2">
               <div className="container flex flex-col items-center justify-center gap-12 px-4">
-                <div className={'font-extrabold text-3xl flex-none flex'}>Band Updates<IconArrowDown size={48} /></div>
+                <div className={"flex flex-none text-3xl font-extrabold"}>
+                  Band Updates
+                  <IconArrowDown size={48} />
+                </div>
                 {isLoading ? (
                   <Loader />
                 ) : (
@@ -103,4 +125,3 @@ export default function Home() {
     </>
   );
 }
-
