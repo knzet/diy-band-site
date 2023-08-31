@@ -177,14 +177,14 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
         {/* <Image src="/images/SB-logo.png" height={30} width={100} alt="" /> */}
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
-          <ActionIcon size="lg" className={"cream-bg-hover mx-1"}>
+          {/* <ActionIcon size="lg" className={"cream-bg-hover mx-1"}>
             <Link href="https://www.youtube.com/@safetybreakroc">
               <IconBrandYoutube size="1.1rem" stroke={1.5} />
             </Link>
           </ActionIcon>
           <ActionIcon size="lg" className={"cream-bg-hover mx-1"}>
             <IconBrandInstagram size="1.1rem" stroke={1.5} />
-          </ActionIcon>
+          </ActionIcon> */}
           <SignInButton />
         </Group>
       </Container>
