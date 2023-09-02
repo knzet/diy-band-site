@@ -16,7 +16,7 @@ export default function SignInButton() {
     return (
       <Button
         className={"nyanza-bg dogwood cream-bg-hover"}
-        onClick={() => void signIn()}
+        onClick={() => void signIn('google')}
       >
         Sign in
       </Button>
