@@ -11,6 +11,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { create } from "domain";
+import { invalid } from "moment";
 import { useState } from "react";
 import { api } from "~/utils/api";
 
@@ -20,7 +21,7 @@ export default function RSVPForm() {
 
   const requestRsvp = api.rsvp.request.useMutation({
     onSuccess(input) {
-      console.log({ input });
+      utils.rsvp.getMine.invalidate();
       setLoading(false);
       setOpen(false);
     },
