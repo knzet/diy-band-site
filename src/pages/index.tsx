@@ -19,38 +19,37 @@ import { appRouter } from "~/server/api/root";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import superjson from "superjson";
 
-export async function getServerSideProps(
-  context: GetServerSidePropsContext<{ id: string }>
-) {
-  console.log('123')
-  const helpers = createServerSideHelpers({
-    router: appRouter,
-    ctx: {},
-    transformer: superjson,
-  });
-  const key = "links";
-  // const id = context.params?.id as string;
-  /*
-   * Prefetching the `post.byId` query.
-   * `prefetch` does not return the result and never throws - if you need that behavior, use `fetch` instead.
-   */
-  // await helpers.blogPost.getAll.prefetch();
-  // await helpers.config.getOne.prefetch({ key });
-  await helpers.blogPost.getAll.prefetch();
-  // Make sure to return { props: { trpcState: helpers.dehydrate() } }
-  return {
-    props: {
-      trpcState: helpers.dehydrate(),
-    },
-  };
-}
+// export async function getServerSideProps(
+//   context: GetServerSidePropsContext<{ id: string }>
+// ) {
+//   console.log('123')
+//   const helpers = createServerSideHelpers({
+//     router: appRouter,
+//     ctx: {},
+//     transformer: superjson,
+//   });
+//   const key = "links";
+//   // const id = context.params?.id as string;
+//   /*
+//    * Prefetching the `post.byId` query.
+//    * `prefetch` does not return the result and never throws - if you need that behavior, use `fetch` instead.
+//    */
+//   // await helpers.blogPost.getAll.prefetch();
+//   // await helpers.config.getOne.prefetch({ key });
+//   await helpers.blogPost.getAll.prefetch();
+//   // Make sure to return { props: { trpcState: helpers.dehydrate() } }
+//   return {
+//     props: {
+//       trpcState: helpers.dehydrate(),
+//     },
+//   };
+// }
 
 export default function Home(props: any) {
   const [links, setLinks] = useState<
     { name: string; url: string; icon?: JSX.Element }[]
   >([]);
   const { data: allPosts, isLoading } = api.blogPost.getAll.useQuery();
-
   console.log({ props });
 
   useEffect(() => {

@@ -1,22 +1,24 @@
 import { Button } from "@mantine/core";
 import { signIn, signOut, useSession } from "next-auth/react";
+import ProfileMenu from "./ProfileMenu";
 
-export default function SignInButton() {
-  const session = useSession();
-  if (session.data?.user) {
+export default function SignInButton({ me }: { me: any }) {
+  // const session = useSession();
+  if (me) {
     return (
-      <Button
-        onClick={() => void signOut()}
-        className={"nyanza-bg dogwood cream-bg-hover font-semibold"}
-      >
-        Sign out
-      </Button>
+      <ProfileMenu me={me} />
+      // <Button
+      //   onClick={() => void signOut()}
+      //   className={"nyanza-bg dogwood cream-bg-hover font-semibold"}
+      // >
+      //   Sign out
+      // </Button>
     );
   } else {
     return (
       <Button
         className={"nyanza-bg dogwood cream-bg-hover"}
-        onClick={() => void signIn('google')}
+        onClick={() => void signIn("google")}
       >
         Sign in
       </Button>

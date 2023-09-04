@@ -12,7 +12,7 @@ export const configurationRouter = createTRPCRouter({
         key: z.string(),
       })
     )
-    .mutation(({ ctx, input }) => {
+    .query(({ ctx, input }) => {
       return ctx.prisma.configuration.findUnique({
         where: {
           key: input.key,

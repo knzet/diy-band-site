@@ -12,6 +12,7 @@ import {
   rem,
   Image,
   Button,
+  Avatar,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -22,6 +23,8 @@ import {
 import Link from "next/link";
 import { api } from "~/utils/api";
 import SignInButton from "./SignInButton";
+import classnames from "classnames";
+import ProfileMenu from "./ProfileMenu";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -104,6 +107,7 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links.public[0]?.link);
   const { data: me } = api.user.me.useQuery();
+
   const { classes, cx } = useStyles();
   const items = links.public.map((link) => (
     <Link
@@ -134,7 +138,7 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
           className={classes.burger}
         />
         {opened && (
-          <Group className={''} spacing={5}>
+          <Group className={""} spacing={5}>
             {items}
             {me?.role?.name === "ADMIN" && (
               <Link
@@ -176,7 +180,12 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
 
         {/* <Image src="/images/SB-logo.png" height={30} width={100} alt="" /> */}
 
-        <Group spacing={0} className={classes.social} position="right" noWrap>
+        <Group
+          spacing={0}
+          className={classnames([classes.social])}
+          position="right"
+          noWrap
+        >
           {/* <ActionIcon size="lg" className={"cream-bg-hover mx-1"}>
             <Link href="https://www.youtube.com/@safetybreakroc">
               <IconBrandYoutube size="1.1rem" stroke={1.5} />
@@ -185,7 +194,8 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
           <ActionIcon size="lg" className={"cream-bg-hover mx-1"}>
             <IconBrandInstagram size="1.1rem" stroke={1.5} />
           </ActionIcon> */}
-          <SignInButton />
+          {/* <SignInButton me={me} /> */}
+          <ProfileMenu me={me} />
         </Group>
       </Container>
     </Header>
