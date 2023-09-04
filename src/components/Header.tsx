@@ -187,8 +187,7 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
           <ActionIcon size="lg" className={"cream-bg-hover mx-1"}>
             <IconBrandInstagram size="1.1rem" stroke={1.5} />
           </ActionIcon> */}
-          {/* <SignInButton /> */}
-          <ProfileMenu me={me} />
+          <SignInButton me={me} />
         </Group>
       </Container>
     </Header>
