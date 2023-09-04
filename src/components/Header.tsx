@@ -12,7 +12,6 @@ import {
   rem,
   Image,
   Button,
-  Avatar,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -23,7 +22,6 @@ import {
 import Link from "next/link";
 import { api } from "~/utils/api";
 import SignInButton from "./SignInButton";
-import classnames from "classnames";
 import ProfileMenu from "./ProfileMenu";
 
 const useStyles = createStyles((theme) => ({
@@ -180,12 +178,7 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
 
         {/* <Image src="/images/SB-logo.png" height={30} width={100} alt="" /> */}
 
-        <Group
-          spacing={0}
-          className={classnames([classes.social])}
-          position="right"
-          noWrap
-        >
+        <Group spacing={0} className={classes.social} position="right" noWrap>
           {/* <ActionIcon size="lg" className={"cream-bg-hover mx-1"}>
             <Link href="https://www.youtube.com/@safetybreakroc">
               <IconBrandYoutube size="1.1rem" stroke={1.5} />
@@ -194,7 +187,7 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
           <ActionIcon size="lg" className={"cream-bg-hover mx-1"}>
             <IconBrandInstagram size="1.1rem" stroke={1.5} />
           </ActionIcon> */}
-          {/* <SignInButton me={me} /> */}
+          {/* <SignInButton /> */}
           <ProfileMenu me={me} />
         </Group>
       </Container>
