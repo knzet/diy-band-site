@@ -44,12 +44,13 @@ model Session {
 model User {
     id            String    @id @default(cuid()) @map("_id") // This is necessary for MongoDB
     name          String?
-    email         String?   @unique
+    email         String    @unique
     emailVerified DateTime?
     role          UserRole? @relation(fields: [userRoleId], references: [id])
     image         String?
     accounts      Account[]
     sessions      Session[]
+    rsvp          Rsvp[]
     userRoleId    String?
 }
 
@@ -69,16 +70,29 @@ model VerificationToken {
 }
 
 model BlogPost {
-    id      String   @id @default(cuid()) @map("_id") // This is necessary for MongoDB
-    title   String
-    content String
-    date    DateTime
+    id        String   @id @default(cuid()) @map("_id") // This is necessary for MongoDB
+    title     String
+    content   String
+    date      DateTime
     published Boolean
 }
 
 model Configuration {
-    id         String   @id @default(cuid()) @map("_id") // This is necessary for MongoDB
-    key         String   @unique
+    id          String  @id @default(cuid()) @map("_id") // This is necessary for MongoDB
+    key         String  @unique
     value       String
     description String?
+}
+
+model Rsvp {
+    id             String   @id @default(cuid()) @map("_id") // This is necessary for MongoDB
+    name           String
+    email          String
+    userId         String
+    requested_date DateTime
+    approved       Boolean
+    rejected       Boolean
+    guests         Int
+    message        String?
+    User           User     @relation(fields: [userId], references: [id])
 }
