@@ -77,3 +77,9 @@
   transform: translateX(10px);
   color: rgb(152, 145, 194);
 }
+
+.markdown {
+  a {
+    color: blue;
+  }
+}

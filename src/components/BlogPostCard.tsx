@@ -33,7 +33,7 @@ export default function BlogPostCard({
         </h3>
         <h2>{moment(post?.date).fromNow()}</h2>
         <ReactMarkdown
-          className={"text-slate-700"}
+          className={'markdown'}
           children={
             post.content.substring(0, charLimit) +
             (post.content.length > charLimit ? "..." : "")

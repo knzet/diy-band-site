@@ -140,7 +140,7 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
             {items}
             {me?.role?.name === "ADMIN" && (
               <Link
-                href={"admin"}
+                href={"/admin"}
                 key={adminLink.label}
                 className={cx(classes.link, {
                   "nyanza-bg-hover": active === adminLink.link,
