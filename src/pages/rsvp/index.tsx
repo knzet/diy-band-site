@@ -4,13 +4,14 @@ import { useState } from "react";
 import BlogPostCard from "~/components/BlogPostCard";
 import CreateBlogPostForm from "~/components/Form/CreateBlogPostForm";
 import { api } from "~/utils/api";
-import { GetSessionParams, getSession } from "next-auth/react";
+import { GetSessionParams, getSession, useSession } from "next-auth/react";
 import { prisma } from "~/server/db";
 import RSVPForm from "~/components/Form/RSVPForm";
 import RealTimeVerify from "~/components/RealTimeVerify";
 
-export default function Admin({ user }: { user: any }) {
+export default function RSVP() {
   const { data: myRsvps, isLoading } = api.rsvp.getMine.useQuery();
+  const { data: session } = useSession();
   //   const {data:approvedRsvpDisplay,isLoading:dataIsLoading} = api.config.getPublic.useQuery()
   return (
     // <div className="items-center justify-center m-auto w-fit">
@@ -65,7 +66,7 @@ export default function Admin({ user }: { user: any }) {
                         RSVP information:
                         <ul>
                           <li>name: {rsvp?.name}</li>
-                          <li>email: {user?.email}</li>
+                          <li>email: {session?.user?.email}</li>
                           <li>guests: {rsvp?.guests}</li>
                           <li>status: rejected</li>
                         </ul>
@@ -104,11 +105,6 @@ export async function getServerSideProps(
       },
     };
   }
-
-  // const fullUser = await prisma.user.findUnique({
-  //   where: { id: session?.user?.id },
-  //   include: { role: true },
-  // });
 
   return {
     props: {
