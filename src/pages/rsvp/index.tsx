@@ -92,23 +92,23 @@ export default function RSVP() {
   );
 }
 
-export async function getServerSideProps(
-  context: GetSessionParams | undefined
-) {
-  const session = await getSession(context);
-  console.log({ session });
-  if (!session?.user) {
-    return {
-      redirect: {
-        destination: "/api/auth/signin",
-        permanent: false,
-      },
-    };
-  }
+// export async function getServerSideProps(
+//   context: GetSessionParams | undefined
+// ) {
+//   const session = await getSession(context);
+//   console.log({ session });
+//   if (!session?.user) {
+//     return {
+//       redirect: {
+//         destination: "/api/auth/signin",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: {
-      user: session?.user,
-    },
-  };
-}
+//   return {
+//     props: {
+//       user: session?.user,
+//     },
+//   };
+// }
