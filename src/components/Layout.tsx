@@ -11,14 +11,17 @@ export const siteTitle = "Safety Break";
 export default function Layout({
   children,
   home,
+  Instagram,
 }: {
   children: any;
   home?: boolean;
+  Instagram?: boolean;
 }) {
   return (
     <>
       <div className="h-screen w-full bg-slate-400">
         <Header
+          Instagram={Instagram}
           links={{
             public: [
               { link: "/", label: "home" },

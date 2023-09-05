@@ -23,7 +23,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (context.req.headers["user-agent"]?.includes("Instagram")) {
     return { props: { Instagram: true } };
   }
-  return { props: { Instagram: true } };
+  return { props: { Instagram: false } };
 }
 
 // export async function getServerSideProps(
@@ -57,7 +57,6 @@ export default function Home(props: any) {
     { name: string; url: string; icon?: JSX.Element }[]
   >([]);
   const { data: allPosts, isLoading } = api.blogPost.getAll.useQuery();
-  console.log({ props });
 
   useEffect(() => {
     setLinks([
@@ -162,7 +161,7 @@ export default function Home(props: any) {
                       ?.sort((a, b) => (a.date > b.date ? -1 : 1))
                       .map((post: BlogPostType) => {
                         return (
-                          <div className={"moveOnHover"}>
+                          <div className={"moveOnHover"} key={post.id}>
                             <BlogPostCard post={post} />
                           </div>
                         );

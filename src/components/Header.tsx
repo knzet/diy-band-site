@@ -95,13 +95,14 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeaderMiddleProps {
+  Instagram?: boolean;
   links: {
     public: { link: string; label: string }[];
     private?: { link: string; label: string }[];
   };
 }
 
-export function HeaderMiddle({ links }: HeaderMiddleProps) {
+export function HeaderMiddle({ links, Instagram }: HeaderMiddleProps) {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links.public[0]?.link);
   const { data: me } = api.user.me.useQuery();
@@ -187,7 +188,7 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
           <ActionIcon size="lg" className={"cream-bg-hover mx-1"}>
             <IconBrandInstagram size="1.1rem" stroke={1.5} />
           </ActionIcon> */}
-          <SignInButton me={me} />
+          <SignInButton me={me} Instagram={Instagram} />
         </Group>
       </Container>
     </Header>
