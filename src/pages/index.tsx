@@ -18,6 +18,7 @@ import { GetServerSidePropsContext } from "next";
 import { appRouter } from "~/server/api/root";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import superjson from "superjson";
+import { Alert } from "@mui/material";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (context.req.headers["user-agent"]?.includes("Instagram")) {
@@ -57,7 +58,12 @@ export default function Home(props: any) {
     { name: string; url: string; icon?: JSX.Element }[]
   >([]);
   const { data: allPosts, isLoading } = api.blogPost.getAll.useQuery();
-
+  const { data: rsvpEnabled } = api.config.getOne.useQuery({
+    key: "rsvpEnabled",
+  });
+  const { data: myRsvp } = api.rsvp.getMine.useQuery();
+  console.log({ myRsvp });
+  const { data: session } = useSession();
   useEffect(() => {
     setLinks([
       {
@@ -98,25 +104,38 @@ export default function Home(props: any) {
       </Head>
       <main className="gradient-top flex min-h-screen flex-col items-center justify-center">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          {props.Instagram && (
-            <div className="flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-              <div className="text-3xl font-extrabold">
-                <Link href={"/"} legacyBehavior>
-                  <a target="_blank">
-                    <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-                      Safety{" "}
-                      <span className="text-[hsl(94,100%,87%)]">Break</span>
-                    </h1>
-                  </a>
+          {rsvpEnabled?.value === "true" &&
+            (myRsvp && myRsvp?.length > 0 ? (
+              <Alert
+                severity={myRsvp?.[0]?.approved === true ? "success" : "info"}
+              >
+                <Link href="/rsvp">
+                  Click here to view your rsvp status.{" "}
+                  {props.Instagram && (
+                    <>
+                      Please open this page in an external browser, not
+                      Instagram's built-in browser.
+                    </>
+                  )}
                 </Link>
-              </div>
-            </div>
-          )}
-          {!props.Instagram && (
-            <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-              Safety <span className="text-[hsl(94,100%,87%)]">Break</span>
-            </h1>
-          )}
+              </Alert>
+            ) : (
+              <Alert severity={"info"}>
+                <Link href="/api/auth/signin?callbackUrl=/rsvp">
+                  DIY show coming soon! Click here to RSVP.{" "}
+                  {props.Instagram && (
+                    <>
+                      Please open this page in an external browser, not
+                      Instagram's built-in browser.
+                    </>
+                  )}
+                </Link>
+              </Alert>
+            ))}
+
+          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
+            Safety <span className="text-[hsl(94,100%,87%)]">Break</span>
+          </h1>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             <section
             // className={utilStyles.headingMd}
@@ -168,7 +187,7 @@ export default function Home(props: any) {
                       })}
                   </div>
                 )}
-              </div>{" "}
+              </div>
             </div>
           </div>
         </div>

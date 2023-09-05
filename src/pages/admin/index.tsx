@@ -38,7 +38,6 @@ export async function getServerSideProps(
   context: GetSessionParams | undefined
 ) {
   const session = await getSession(context);
-
   if (!session?.user) {
     return {
       redirect: {
