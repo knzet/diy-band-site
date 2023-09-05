@@ -95,7 +95,7 @@ export async function getServerSideProps(
   context: GetSessionParams | undefined
 ) {
   const session = await getSession(context);
-
+  console.log({ session });
   if (!session?.user) {
     return {
       redirect: {
@@ -105,10 +105,10 @@ export async function getServerSideProps(
     };
   }
 
-  const fullUser = await prisma.user.findUnique({
-    where: { id: session?.user?.id },
-    include: { role: true },
-  });
+  // const fullUser = await prisma.user.findUnique({
+  //   where: { id: session?.user?.id },
+  //   include: { role: true },
+  // });
 
   return {
     props: {
