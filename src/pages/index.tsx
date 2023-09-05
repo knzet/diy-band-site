@@ -121,7 +121,11 @@ export default function Home(props: any) {
               </Alert>
             ) : (
               <Alert severity={"info"}>
-                <Link href="/api/auth/signin?callbackUrl=/rsvp">
+                <Link
+                  href={
+                    props.Instagram ? "/" : "/api/auth/signin?callbackUrl=/rsvp"
+                  }
+                >
                   DIY show coming soon! Click here to RSVP.{" "}
                   {props.Instagram && (
                     <>
