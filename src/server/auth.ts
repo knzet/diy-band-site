@@ -10,8 +10,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
-import bcrypt from 'bcrypt';
-
+import bcrypt from "bcrypt";
+import EmailProvider from "next-auth/providers/email";
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
  * object and keep type safety.
@@ -57,6 +57,17 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
+    EmailProvider({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD
+        }
+      },
+      from: process.env.EMAIL_FROM
+    }),
     // credentials provider WIP, need to do token stuff
     // CredentialsProvider({
     //   // The name to display on the sign in form (e.g. "Sign in with...")
@@ -70,8 +81,8 @@ export const authOptions: NextAuthOptions = {
     //     password: { label: "Password", type: "password" },
     //   },
     //   async authorize(credentials, req) {
-    //     if(!credentials?.email) return null
-    //     if(!credentials?.password) return null
+    //     if (!credentials?.email) return null;
+    //     if (!credentials?.password) return null;
     //     // Add logic here to look up the user from the credentials supplied
     //     let user = await prisma.user.findFirst({
     //       where: {
@@ -81,22 +92,22 @@ export const authOptions: NextAuthOptions = {
     //         role: true,
     //       },
     //     });
-    //     if(!user&& credentials?.password) {
-    //       const salt = await bcrypt.genSalt(10)
-    //       const hash = await  bcrypt.hash(credentials?.password, salt)
+    //     if (!user && credentials?.password) {
+    //       const salt = await bcrypt.genSalt(10);
+    //       const hash = await bcrypt.hash(credentials?.password, salt);
     //       const newUser = await prisma.user.create({
     //         data: {
     //           email: credentials?.email,
-    //         }
-    //       })
+    //         },
+    //       });
     //       const account = await prisma.account.create({
     //         data: {
     //           userId: newUser.id,
-    //           type: 'jwt',
-    //           provider: 'credentials',
+    //           type: "jwt",
+    //           provider: "credentials",
     //           providerAccountId: newUser.id,
-    //         }
-    //       })
+    //         },
+    //       });
     //     }
     //     if (user) {
     //       // Any object returned will be saved in `user` property of the JWT
@@ -106,9 +117,8 @@ export const authOptions: NextAuthOptions = {
     //       return null;
     //       // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
     //     }
-    //   }
-    
-    // },
+    //   },
+    // }),
     /**
      * ...add more providers here.
      *
