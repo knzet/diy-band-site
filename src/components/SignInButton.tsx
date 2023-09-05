@@ -18,7 +18,7 @@ export default function SignInButton({ me }: { me: any }) {
     return (
       <Button
         className={"nyanza-bg dogwood cream-bg-hover"}
-        onClick={() => void signIn("google")}
+        onClick={() => void signIn()}
       >
         Sign in
       </Button>
