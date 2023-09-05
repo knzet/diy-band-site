@@ -16,13 +16,13 @@ export default function SignInButton({
   if (me) {
     return <ProfileMenu me={me} />;
   } else {
-    if (Instagram===true) {
+    if (Instagram === true) {
       return (
         <>
           {visible ? (
             <div>
-              Please open the site in your external browser, not the Instagram
-              app.
+              Please open the site in your external browser like Safari or Chrome to sign in. That
+              way, your device can remember your login.
             </div>
           ) : (
             <Button
