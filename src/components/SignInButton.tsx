@@ -21,8 +21,7 @@ export default function SignInButton({
         <>
           {visible ? (
             <div>
-              Please open the site in your external browser like Safari or Chrome to sign in. That
-              way, your device can remember your login.
+              Please open the site in your external browser, like Safari or Chrome.
             </div>
           ) : (
             <Button
