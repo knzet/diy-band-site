@@ -6,9 +6,13 @@ import CreateBlogPostForm from "~/components/Form/CreateBlogPostForm";
 import { api } from "~/utils/api";
 import { GetSessionParams, getSession } from "next-auth/react";
 import { prisma } from "~/server/db";
+import { get } from "http";
 
 export default function Admin(props: any) {
   console.log({ props });
+  const { data: user, isLoading: userLoading } = api.user.me.useQuery();
+  console.log({ user });
+  if (userLoading || user?.role?.name !== "ADMIN") return <Loader />;
   const { data: allPosts, isLoading } = api.blogPost.getAll.useQuery();
   return (
     // <div className="items-center justify-center m-auto w-fit">
@@ -35,35 +39,35 @@ export default function Admin(props: any) {
   );
 }
 
-export async function getServerSideProps(
-  context: GetSessionParams | undefined
-) {
-  const session = await getSession(context);
-  console.log({ session });
-  console.log(!session?.user);
-  if (!session?.user) {
-    return {
-      // notFound: true,
-      redirect: {
-        destination: "/api/auth/signin",
-        permanent: false,
-      },
-    };
-  }
+// export async function getServerSideProps(
+//   context: GetSessionParams | undefined
+// ) {
+//   const session = await getSession(context);
+//   console.log({ session });
+//   console.log(!session?.user);
+//   if (!session?.user) {
+//     return {
+//       // notFound: true,
+//       redirect: {
+//         destination: "/api/auth/signin",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  const fullUser = await prisma.user.findUnique({
-    where: { id: session?.user?.id },
-    include: { role: true },
-  });
-  if (fullUser?.role?.name !== "ADMIN") {
-    return {
-      notFound: true,
-    };
-  }
+//   const fullUser = await prisma.user.findUnique({
+//     where: { id: session?.user?.id },
+//     include: { role: true },
+//   });
+//   if (fullUser?.role?.name !== "ADMIN") {
+//     return {
+//       notFound: true,
+//     };
+//   }
 
-  return {
-    props: {
-      user: fullUser,
-    },
-  };
-}
+//   return {
+//     props: {
+//       user: fullUser,
+//     },
+//   };
+// }
