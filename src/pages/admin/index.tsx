@@ -7,7 +7,8 @@ import { api } from "~/utils/api";
 import { GetSessionParams, getSession } from "next-auth/react";
 import { prisma } from "~/server/db";
 
-export default function Admin() {
+export default function Admin(props: any) {
+  console.log({ props });
   const { data: allPosts, isLoading } = api.blogPost.getAll.useQuery();
   return (
     // <div className="items-center justify-center m-auto w-fit">
@@ -38,8 +39,11 @@ export async function getServerSideProps(
   context: GetSessionParams | undefined
 ) {
   const session = await getSession(context);
+  console.log({ session });
+  console.log(!session?.user);
   if (!session?.user) {
     return {
+      // notFound: true,
       redirect: {
         destination: "/api/auth/signin",
         permanent: false,
@@ -59,7 +63,7 @@ export async function getServerSideProps(
 
   return {
     props: {
-      user: session?.user,
+      user: fullUser,
     },
   };
 }
