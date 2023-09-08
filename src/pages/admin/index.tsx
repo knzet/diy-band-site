@@ -12,8 +12,9 @@ export default function Admin(props: any) {
   console.log({ props });
   const { data: user, isLoading: userLoading } = api.user.me.useQuery();
   console.log({ user });
-  if (userLoading || user?.role?.name !== "ADMIN") return <Loader />;
+
   const { data: allPosts, isLoading } = api.blogPost.getAll.useQuery();
+  if (userLoading || user?.role?.name !== "ADMIN") return <Loader />;
   return (
     // <div className="items-center justify-center m-auto w-fit">
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#f7d488ff] to-[#eaefb1ff]">
