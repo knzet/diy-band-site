@@ -7,6 +7,7 @@ import { api } from "~/utils/api";
 import { GetSessionParams, getSession } from "next-auth/react";
 import { prisma } from "~/server/db";
 import { get } from "http";
+import Link from "next/link";
 
 export default function Admin(props: any) {
   console.log({ props });
@@ -25,6 +26,7 @@ export default function Admin(props: any) {
           <Loader />
         ) : (
           <div className="flex-column items-start">
+            <Link href="/admin/rsvp">RSVP</Link>
             <Card className="bg-slate-200">
               <CreateBlogPostForm />
             </Card>

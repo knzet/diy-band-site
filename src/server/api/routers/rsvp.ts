@@ -12,7 +12,7 @@ export const rsvpRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const post = await ctx.prisma.rsvp.update({
         where: { id: input.id },
-        data: { approved: true },
+        data: { approved: true, rejected: false },
       });
       return post;
     }),
@@ -22,6 +22,15 @@ export const rsvpRouter = createTRPCRouter({
       const post = await ctx.prisma.rsvp.update({
         where: { id: input.id },
         data: { approved: false },
+      });
+      return post;
+    }),
+  rejectById: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const post = await ctx.prisma.rsvp.update({
+        where: { id: input.id },
+        data: { approved: false, rejected: true },
       });
       return post;
     }),
@@ -58,6 +67,9 @@ export const rsvpRouter = createTRPCRouter({
     return ctx.prisma.rsvp.findMany({
       where: { approved: false },
     });
+  }),
+  getAll: protectedProcedure.query(({ ctx }) => {
+    return ctx.prisma.rsvp.findMany({});
   }),
   // get one needs an input of post id
   getAllApproved: protectedProcedure

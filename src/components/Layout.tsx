@@ -6,6 +6,7 @@ import Link from "next/link";
 import { DoubleNavbar } from "./Navbar";
 import { Navbar } from "@mantine/core";
 import { HeaderMiddle as Header } from "./Header";
+import { api } from "~/utils/api";
 export const siteTitle = "Safety Break";
 
 export default function Layout({
@@ -26,8 +27,10 @@ export default function Layout({
             public: [
               { link: "/", label: "home" },
               { link: "/blog", label: "blog" },
+              
             ],
             private: [{ link: "admin", label: "admin" }],
+            rsvpEnabled: [{ link: "/rsvp", label: "rsvp" }]
           }}
         />
         {/* <Navbar height={750} width={{ sm: 300 }}> */}

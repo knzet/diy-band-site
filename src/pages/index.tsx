@@ -106,6 +106,7 @@ export default function Home(props: any) {
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           {rsvpEnabled?.value === "true" &&
             (myRsvp && myRsvp?.length > 0 ? (
+              // case: has rsps
               <Alert
                 severity={myRsvp?.[0]?.approved === true ? "success" : "info"}
               >
@@ -120,12 +121,14 @@ export default function Home(props: any) {
                 </Link>
               </Alert>
             ) : session?.user ? (
+              // case: no rsps, logged in
               <Alert severity={"info"}>
                 <Link href={props.Instagram ? "/" : "/rsvp"}>
                   DIY show coming soon! Click here to RSVP.
                 </Link>
               </Alert>
             ) : (
+              // case: not logged in
               <Alert severity={"info"}>
                 <Link
                   href={
@@ -188,6 +191,7 @@ export default function Home(props: any) {
                   <div className="flex-column items-start">
                     {allPosts
                       ?.sort((a, b) => (a.date > b.date ? -1 : 1))
+                      .slice(0, 3)
                       .map((post: BlogPostType) => {
                         return (
                           <div className={"moveOnHover"} key={post.id}>

@@ -99,6 +99,7 @@ interface HeaderMiddleProps {
   links: {
     public: { link: string; label: string }[];
     private?: { link: string; label: string }[];
+    rsvpEnabled?: { link: string; label: string }[];
   };
 }
 
@@ -106,7 +107,9 @@ export function HeaderMiddle({ links, Instagram }: HeaderMiddleProps) {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links.public[0]?.link);
   const { data: me } = api.user.me.useQuery();
-
+  const { data: rsvpEnabled } = api.config.getOne.useQuery({
+    key: "rsvpEnabled",
+  });
   const { classes, cx } = useStyles();
   const items = links.public.map((link) => (
     <Link
@@ -126,6 +129,7 @@ export function HeaderMiddle({ links, Instagram }: HeaderMiddleProps) {
   ));
 
   const adminLink = { link: "/admin", label: "admin" };
+  const rsvpLink = { link: "/rsvp", label: "rsvp" };
 
   return (
     <Header height={56} className={"jasmine-bg"}>
@@ -155,6 +159,22 @@ export function HeaderMiddle({ links, Instagram }: HeaderMiddleProps) {
                 {adminLink.label}
               </Link>
             )}
+            {rsvpEnabled?.value === "true" && (
+              <Link
+                href={"/rsvp"}
+                key={rsvpLink.label}
+                className={cx(classes.link, {
+                  "nyanza-bg-hover": active === rsvpLink.link,
+                  "nyanza-bg dogwood cream-bg-hover": true,
+                })}
+                onClick={(event) => {
+                  // event.preventDefault();
+                  setActive(rsvpLink.link);
+                }}
+              >
+                {rsvpLink.label}
+              </Link>
+            )}
           </Group>
         )}
         <Group className={classes.links} spacing={5}>
@@ -173,6 +193,22 @@ export function HeaderMiddle({ links, Instagram }: HeaderMiddleProps) {
               }}
             >
               {adminLink.label}
+            </Link>
+          )}
+          {rsvpEnabled?.value === "true" && (
+            <Link
+              href={"/rsvp"}
+              key={rsvpLink.label}
+              className={cx(classes.link, {
+                "nyanza-bg-hover": active === rsvpLink.link,
+                "nyanza-bg dogwood cream-bg-hover": true,
+              })}
+              onClick={(event) => {
+                // event.preventDefault();
+                setActive(rsvpLink.link);
+              }}
+            >
+              {rsvpLink.label}
             </Link>
           )}
         </Group>

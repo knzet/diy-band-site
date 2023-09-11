@@ -8,8 +8,10 @@ import { GetSessionParams, getSession, useSession } from "next-auth/react";
 import { prisma } from "~/server/db";
 import RSVPForm from "~/components/Form/RSVPForm";
 import RealTimeVerify from "~/components/RealTimeVerify";
-
+import { Image } from "@mantine/core";
+import { signIn } from "next-auth/react";
 export default function RSVP() {
+  const { data: me, isLoading: accountLoading } = api.user.me.useQuery();
   const { data: myRsvps, isLoading } = api.rsvp.getMine.useQuery();
   const { data: coverAmount } = api.config.getOne.useQuery({
     key: "coverAmount",
@@ -23,6 +25,21 @@ export default function RSVP() {
     // <div className="items-center justify-center m-auto w-fit">
     <main className="flex min-h-screen flex-col items-center  bg-gradient-to-b from-[#f7d488ff] to-[#eaefb1ff]">
       <div className="container flex flex-col items-center  gap-12 px-4 py-16 ">
+        {!session?.user?.email && (
+          <div className="flex flex-col items-center justify-center">
+            <p className="text-center text-2xl font-bold">
+              You must be logged in to RSVP
+            </p>
+            <p className="p-2 text-center text-xl font-bold">
+              <Button
+                className={"nyanza-bg dogwood cream-bg-hover"}
+                onClick={() => void signIn("google")}
+              >
+                Sign in
+              </Button>
+            </p>
+          </div>
+        )}
         {isLoading ? (
           <Loader />
         ) : (
@@ -34,6 +51,11 @@ export default function RSVP() {
                     RSVP for the Rochester house show on 9/30
                   </p>
                   <RSVPForm />
+                  <Image
+                    className="pt-2"
+                    src="/images/poster.jpg"
+                    alt="Safety Break logo"
+                  />
                 </div>
               </Card>
             ) : (
@@ -109,6 +131,11 @@ export default function RSVP() {
                         your RSVP is pending approval. check back later for more
                         info
                       </p>
+                      <Image
+                        className="pt-2"
+                        src="/images/poster.jpg"
+                        alt="Safety Break logo"
+                      />
                     </div>
                   </Card>
                 )
