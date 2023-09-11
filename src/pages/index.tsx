@@ -119,6 +119,12 @@ export default function Home(props: any) {
                   )}
                 </Link>
               </Alert>
+            ) : session?.user ? (
+              <Alert severity={"info"}>
+                <Link href={props.Instagram ? "/" : "/rsvp"}>
+                  DIY show coming soon! Click here to RSVP.
+                </Link>
+              </Alert>
             ) : (
               <Alert severity={"info"}>
                 <Link

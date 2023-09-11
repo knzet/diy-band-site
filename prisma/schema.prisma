@@ -93,6 +93,7 @@ model Rsvp {
     approved       Boolean
     rejected       Boolean
     guests         Int
+    coverRequired  Boolean
     message        String?
     User           User     @relation(fields: [userId], references: [id])
 }

@@ -11,6 +11,12 @@ import RealTimeVerify from "~/components/RealTimeVerify";
 
 export default function RSVP() {
   const { data: myRsvps, isLoading } = api.rsvp.getMine.useQuery();
+  const { data: coverAmount } = api.config.getOne.useQuery({
+    key: "coverAmount",
+  });
+  const { data: address } = api.config.getOne.useQuery({
+    key: "address",
+  });
   const { data: session } = useSession();
   //   const {data:approvedRsvpDisplay,isLoading:dataIsLoading} = api.config.getPublic.useQuery()
   return (
@@ -36,14 +42,37 @@ export default function RSVP() {
                   <Card className="bg-[#57ff62]">
                     <div className="flex flex-col items-center justify-center">
                       <p className="text-center text-2xl font-bold">
-                        approved. Show this page at the door for entry (must
-                        show the live page, not a screenshot)
+                        approved. Show this page at the door for entry
+                      </p>
+                      <p className="text-center text-xl font-bold">
+                        (must show the live page, not a screenshot)
                       </p>
                       <ul>
                         <li>name: {rsvp?.name}</li>
                         <li>guests: {rsvp?.guests}</li>
+                        <li>
+                          cover:{" "}
+                          {rsvp?.coverRequired === true
+                            ? "$" +
+                              parseInt(coverAmount?.value as string).toFixed(2)
+                            : "FREE"}
+                        </li>
+                        {address && (
+                          <li>
+                            address:{" "}
+                            <a
+                              href={`https://www.google.com/maps/dir/?api=1&destination=${address.value}`}
+                              target="_blank"
+                            >
+                              {address.value}
+                            </a>
+                          </li>
+                        )}
+                        {rsvp?.message && (
+                          <li className="font-bold">{rsvp?.message}</li>
+                        )}
                       </ul>
-                      <RealTimeVerify />
+                      <RealTimeVerify className="pt-6" />
                       {/* {approvedRsvpDisplay && (
                       <div className="flex flex-col items-center justify-center">
                         <p className="text-center text-2xl font-bold">

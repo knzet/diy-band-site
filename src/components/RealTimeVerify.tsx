@@ -2,7 +2,7 @@ import moment from "moment";
 import { useState } from "react";
 
 // prevents sharing a screenshot of the page
-export default function RealTimeVerify() {
+export default function RealTimeVerify(props: { className?: string | undefined; }) {
   const [timestamp, setTimestamp] = useState(
     moment().format("MMMM Do YYYY, h:mm:ss a")
   );
@@ -12,6 +12,6 @@ export default function RealTimeVerify() {
     var now = moment().format("MMMM Do YYYY, h:mm:ss a");
     setTimestamp(now);
   }, 1000);
-  
-  return <div>{timestamp}</div>;
+
+  return <div className={props.className}>{timestamp}</div>;
 }

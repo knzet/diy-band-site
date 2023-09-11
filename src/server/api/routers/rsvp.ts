@@ -41,9 +41,10 @@ export const rsvpRouter = createTRPCRouter({
           userId: id,
           requested_date: new Date(),
           approved: false,
+          coverRequired: true,
           rejected: false,
           guests: input.guests,
-          message: "rsvp pending approval",
+          message: "",
         },
       });
     }),
