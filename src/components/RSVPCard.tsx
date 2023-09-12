@@ -39,26 +39,27 @@ export default function RSVPCard({ rsvp }: { rsvp: any }) {
       <EditRsvpForm rsvp={rsvp} />
       <div>name:</div>
       <div>{rsvp.name}</div>
-      <div>email:</div>
-      <div>{rsvp.email}</div>
+      {/* <div>email:</div>
+      <div>{rsvp.email}</div> */}
       <div>guests:</div>
       <div>{rsvp.guests}</div>
-      <div>cover required:</div>
-      <div>{rsvp.coverRequired === true ? "true" : 'false'}</div>
       <div>requested date:</div>
       <div>{moment(rsvp.requested_date).toLocaleString()}</div>
       <div>status:</div>
       <div>{rsvp.approved ? 'approved' : rsvp.rejected ? 'rejected' : 'pending'}</div>
-      <div>message:</div>
-      <div>{rsvp.message}</div>
-      <Button onClick={() => {
-        setLoading(true)
-        approveRsvp({ id: rsvp.id })
-      }}>Approve</Button>
-      <Button onClick={() => {
-        setLoading(true)
-        rejectRsvp({ id: rsvp.id })
-      }}>Deny</Button>
+      <div>cover required:</div>
+      <div>{rsvp.coverRequired === true ? "true" : 'false'}</div>
+      {rsvp.message && <div>message:</div>}
+      {rsvp.message && <div>{rsvp.message}</div>}
+      <div className='grid grid-cols-2'>
+        <Button onClick={() => {
+          setLoading(true)
+          approveRsvp({ id: rsvp.id })
+        }}>Approve</Button>
+        <Button onClick={() => {
+          setLoading(true)
+          rejectRsvp({ id: rsvp.id })
+        }}>Deny</Button></div>
     </Card>
   );
 }
