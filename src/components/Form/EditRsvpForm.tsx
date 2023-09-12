@@ -7,6 +7,7 @@ import {
   Modal,
   Switch,
   Textarea,
+  NumberInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Rsvp } from "@prisma/client";
@@ -54,10 +55,10 @@ export default function EditRsvpForm({ rsvp }: { rsvp: Rsvp }) {
           <form
             onSubmit={form.onSubmit((values) => {
               setLoading(true);
-              editRsvp.mutate({ id: rsvp.id, message: values.message as string, guests: values.guests as number, coverRequired: values.coverRequired });
+              editRsvp.mutate({ id: rsvp.id, message: values.message as string, guests: values.guests as unknown as number, coverRequired: values.coverRequired });
             })}
           >
-            <TextInput
+            <NumberInput
               label="Guests"
               placeholder="new rsvp"
               {...form.getInputProps("guests")}
