@@ -31,7 +31,7 @@ export default function RSVPCard({ rsvp }: { rsvp: any }) {
       ? "red"
       : "yellow";
   return (
-    <Card className={classNames("mx-auto my-3 grid w-max grid-cols-2 p-3", {
+    <Card className={classNames("mx-auto my-3 grid w-max sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 p-3", {
       'bg-amber-300': !rsvp.approved && !rsvp.rejected,
       'bg-green-400': rsvp.approved && !rsvp.rejected,
       'bg-red-400': rsvp.rejected && !rsvp.approved

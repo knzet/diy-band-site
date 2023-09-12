@@ -22,7 +22,7 @@ export default function RSVP() {
     }
     , [filters, allRsvps])
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#f7d488ff] to-[#eaefb1ff]">
+    <main className="flex min-h-screen max-w-screen flex-col items-center justify-center bg-gradient-to-b from-[#f7d488ff] to-[#eaefb1ff]">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
         <h1>RSVP management</h1>
         <div className='flex flex-row'>
