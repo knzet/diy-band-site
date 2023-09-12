@@ -80,4 +80,21 @@ export const rsvpRouter = createTRPCRouter({
       });
       return post;
     }),
+  edit: protectedProcedure
+    .input(z.object({
+      id: z.string(),
+      coverRequired: z.boolean().optional(),
+      guests: z.number().optional(),
+      message: z.string().optional(),
+    }))
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.rsvp.update({
+        where: { id: input?.id },
+        data: {
+          coverRequired: input.coverRequired,
+          guests: input.guests,
+          message: input.message
+        }
+      });
+    }),
 });

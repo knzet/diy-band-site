@@ -1,12 +1,6 @@
-import { Button, Card, Loader, Modal, TextInput } from "@mantine/core";
-import { BlogPost as BlogPostType } from "@prisma/client";
-import { useState } from "react";
-import BlogPostCard from "~/components/BlogPostCard";
-import CreateBlogPostForm from "~/components/Form/CreateBlogPostForm";
+import { Button, Card, Loader } from "@mantine/core";
+// import Button from '~/components/Button';
 import { api } from "~/utils/api";
-import { GetSessionParams, getSession } from "next-auth/react";
-import { prisma } from "~/server/db";
-import { get } from "http";
 import Link from "next/link";
 
 export default function Admin(props: any) {
@@ -20,21 +14,19 @@ export default function Admin(props: any) {
     // <div className="items-center justify-center m-auto w-fit">
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#f7d488ff] to-[#eaefb1ff]">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <p>work in progress admin ui, create/edit/delete posts from here</p>
-
+        <p>work in progress admin ui</p>
         {isLoading ? (
           <Loader />
         ) : (
           <div className="flex-column items-start">
-            <Link href="/admin/rsvp">RSVP</Link>
-            <Card className="bg-slate-200">
-              <CreateBlogPostForm />
-            </Card>
-            {allPosts
-              ?.sort((a, b) => (a.date > b.date ? -1 : 1))
-              .map((post: BlogPostType) => {
-                return <BlogPostCard post={post} key={post.id} admin={true} />;
-              })}
+            <div>
+              <Card className="bg-slate-200">
+                <Link href="/admin/rsvp"><Button size='lg' className='nyanza-bg dogwood cream-bg-hover'>RSVP</Button></Link>
+              </Card>
+              <Card className="bg-slate-200">
+                <Link href="/admin/blog"><Button size='lg' className='nyanza-bg dogwood cream-bg-hover'>Blog</Button></Link>
+              </Card>
+            </div>
           </div>
         )}
       </div>

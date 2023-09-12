@@ -15,7 +15,7 @@ export default function BlogPost() {
     <main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-[#fff822] to-[#e8bd49]">
       <Link href="/blog">
         <Card className="cream-bg nyanza-bg-hover m-4 rounded-md p-4">
-          <h1 className="text-4xl font-bold">Blog</h1>
+          <h1 className="text-4xl font-bold">Band News</h1>
         </Card>
       </Link>
       <div className="cream-bg mt-10 rounded-md p-4">

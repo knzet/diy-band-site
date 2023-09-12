@@ -145,7 +145,7 @@ export function HeaderMiddle({ links, Instagram }: HeaderMiddleProps) {
             {items}
             {me?.role?.name === "ADMIN" && (
               <Link
-                href={"/admin"}
+                href={adminLink.link}
                 key={adminLink.label}
                 className={cx(classes.link, {
                   "nyanza-bg-hover": active === adminLink.link,
@@ -161,7 +161,7 @@ export function HeaderMiddle({ links, Instagram }: HeaderMiddleProps) {
             )}
             {rsvpEnabled?.value === "true" && (
               <Link
-                href={"/rsvp"}
+                href={rsvpLink.link}
                 key={rsvpLink.label}
                 className={cx(classes.link, {
                   "nyanza-bg-hover": active === rsvpLink.link,
@@ -181,7 +181,7 @@ export function HeaderMiddle({ links, Instagram }: HeaderMiddleProps) {
           {items}
           {me?.role?.name === "ADMIN" && (
             <Link
-              href={"admin"}
+              href={adminLink.link}
               key={adminLink.label}
               className={cx(classes.link, {
                 "nyanza-bg-hover": active === adminLink.link,
@@ -197,7 +197,7 @@ export function HeaderMiddle({ links, Instagram }: HeaderMiddleProps) {
           )}
           {rsvpEnabled?.value === "true" && (
             <Link
-              href={"/rsvp"}
+              href={rsvpLink.link}
               key={rsvpLink.label}
               className={cx(classes.link, {
                 "nyanza-bg-hover": active === rsvpLink.link,

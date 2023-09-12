@@ -181,7 +181,7 @@ export default function Home(props: any) {
 
             <div className="flex flex-col items-center gap-2">
               <div className="container flex flex-col items-center justify-center gap-12 px-4">
-                <div className={"flex flex-none text-3xl font-extrabold"}>
+                <div className={"flex flex-none text-3xl font-extrabold text-white"}>
                   Band Updates
                   <IconArrowDown size={48} />
                 </div>
