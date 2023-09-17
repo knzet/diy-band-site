@@ -28,7 +28,7 @@ export default function RSVP() {
         {!session?.user?.email && (
           <div className="flex flex-col items-center justify-center">
             <p className="text-center text-2xl font-bold">
-              You must be logged in to RSVP
+              You must be logged in to RSVP. Open the site from your device's browser like Safari, not Instragram's in-app browser.
             </p>
             <p className="p-2 text-center text-xl font-bold">
               <Button
@@ -76,7 +76,7 @@ export default function RSVP() {
                           cover:{" "}
                           {rsvp?.coverRequired === true
                             ? "$" +
-                              parseInt(coverAmount?.value as string).toFixed(2)
+                            parseInt(coverAmount?.value as string).toFixed(2)
                             : "FREE"}
                         </li>
                         {address && (
