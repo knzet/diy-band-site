@@ -6,7 +6,6 @@ import RSVPCard from "~/components/RSVPCard";
 import { api } from "~/utils/api";
 
 export default function RSVP() {
-  const { data: user, isLoading: userLoading } = api.user.me.useQuery();
   const { data: allRsvps } = api.rsvp.getAll.useQuery();
   const [filters, setFilters] = useState<{ key: string, value: any }[]>([])
   const [filteredData, setFilteredData] = useState(allRsvps)

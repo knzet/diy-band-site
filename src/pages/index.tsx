@@ -109,6 +109,7 @@ export default function Home(props: any) {
               // case: has rsps
               <Alert
                 severity={myRsvp?.[0]?.approved === true ? "success" : "info"}
+                className='alert'
               >
                 <Link href="/rsvp">
                   Click here to view your rsvp status.{" "}
@@ -122,14 +123,14 @@ export default function Home(props: any) {
               </Alert>
             ) : session?.user ? (
               // case: no rsps, logged in
-              <Alert severity={"info"}>
+              <Alert severity={"info"} className='alert'>
                 <Link href={props.Instagram ? "/" : "/rsvp"}>
                   DIY show coming soon! Click here to RSVP.
                 </Link>
               </Alert>
             ) : (
               // case: not logged in
-              <Alert severity={"info"}>
+              <Alert severity={"info"} className='alert'>
                 <Link
                   href={
                     props.Instagram ? "/" : "/api/auth/signin?callbackUrl=/rsvp"
