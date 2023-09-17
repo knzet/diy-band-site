@@ -27,6 +27,13 @@ export default function RSVP() {
         <h1>RSVP management</h1>
         <div>Filter: {filters.map(filter => filter.key + ': ' + filter.value as string).join(', ')}</div>
         <div>Count: {filteredData?.length || 0}/{allRsvps?.length}</div>
+        <div>Total People Admitted (including guests): {allRsvps?.reduce((acc, cur) => {
+          if (cur.approved) {
+            return acc + cur.guests
+          } else {
+            return acc
+          }
+        }, 0)}</div>
         <div className={classNames('flex flex-row bg-slate-200 p-4')}>
           <Button onClick={() => setFilters([{
             key: 'coverRequired',
