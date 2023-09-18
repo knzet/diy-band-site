@@ -53,7 +53,7 @@ export default function RSVP() {
                   <RSVPForm />
                   <Image
                     className="pt-2"
-                    src="/images/poster.jpg"
+                    src="/images/poster.png"
                     alt="Safety Break logo"
                   />
                 </div>
@@ -133,7 +133,7 @@ export default function RSVP() {
                       </p>
                       <Image
                         className="pt-2"
-                        src="/images/poster.jpg"
+                        src="/images/poster.png"
                         alt="Safety Break logo"
                       />
                     </div>
