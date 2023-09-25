@@ -11,7 +11,7 @@ export default function RSVP() {
   const [filteredData, setFilteredData] = useState(allRsvps);
   useEffect(() => {
     let filtered = allRsvps?.sort((a, b) => {
-      return a.requested_date > b.requested_date ? 1 : -1;
+      return a.requested_date < b.requested_date ? 1 : -1;
     });
     for (let filter of filters) {
       filtered = filtered?.filter((v) => {
