@@ -90,7 +90,7 @@ export default function RSVP() {
                             </a>
                           </li>
                         )}
-                        <li>doors open at 7:30, music 8-11</li>
+                        <li className="italic font-bold">doors open at 7:30, music 8-11</li>
                         {rsvp?.message && (
                           <li className="font-bold">{rsvp?.message}</li>
                         )}
