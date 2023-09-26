@@ -67,7 +67,7 @@ export default function RSVP() {
                         See you on Saturday! Show this page at the door for entry.
                       </p>
                       <ul>
-                        <li>name: {rsvp?.name}{rsvp?.guests > 1 && ' + '.concat((rsvp?.guests - 1).toString())}</li>
+                        <li>name: {rsvp?.name}{rsvp?.guests > 1 && ' + '.concat((rsvp?.guests - 1).toString()).concat(' guests')}</li>
                         <li>
                           cover:{" "}
                           {rsvp?.coverRequired === true
