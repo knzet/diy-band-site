@@ -63,7 +63,7 @@ export default function RSVP() {
                 rsvp?.approved ? (
                   <Card className="bg-[#57ff62]">
                     <div className="flex flex-col items-center justify-center">
-                      <p className="text-center text-2xl font-bold">
+                      <p className="text-center text-2xl font-bold mb-2">
                         See you on Saturday! Show this page at the door for entry.
                       </p>
                       <ul>
