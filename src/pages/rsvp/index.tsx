@@ -67,7 +67,7 @@ export default function RSVP() {
                         See you on Saturday! Show this page at the door for entry.
                       </p>
                       <ul>
-                        <li>name: {rsvp?.name}+{rsvp?.guests > 1 && rsvp?.guests - 1}</li>
+                        <li>name: {rsvp?.name}{rsvp?.guests > 1 && ' + ' + rsvp?.guests - 1}</li>
                         <li>
                           cover:{" "}
                           {rsvp?.coverRequired === true
