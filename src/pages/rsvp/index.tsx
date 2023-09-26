@@ -64,10 +64,7 @@ export default function RSVP() {
                   <Card className="bg-[#57ff62]">
                     <div className="flex flex-col items-center justify-center">
                       <p className="text-center text-2xl font-bold">
-                        approved. Show this page at the door for entry
-                      </p>
-                      <p className="text-center text-xl font-bold">
-                        (must show the live page, not a screenshot)
+                        See you on Saturday! Show this page at the door for entry.
                       </p>
                       <ul>
                         <li>name: {rsvp?.name}</li>
