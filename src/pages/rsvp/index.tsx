@@ -79,7 +79,7 @@ export default function RSVP() {
                           <>
                             <li>
                               address:{" "}
-                              <a
+                              <a className="font-bold"
                                 href={`https://www.google.com/maps/dir/?api=1&destination=${address.value}`}
                                 target="_blank"
                               >
