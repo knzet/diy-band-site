@@ -76,19 +76,25 @@ export default function RSVP() {
                           cover:{" "}
                           {rsvp?.coverRequired === true
                             ? "$" +
-                            parseInt(coverAmount?.value as string).toFixed(2)
+                            parseInt(coverAmount?.value as string).toFixed(2) + ' (cash only)'
                             : "FREE"}
                         </li>
                         {address && (
-                          <li>
-                            address:{" "}
-                            <a
-                              href={`https://www.google.com/maps/dir/?api=1&destination=${address.value}`}
-                              target="_blank"
-                            >
-                              {address.value}
-                            </a>
-                          </li>
+                          <>
+                            <li>
+                              address:{" "}
+                              <a
+                                href={`https://www.google.com/maps/dir/?api=1&destination=${address.value}`}
+                                target="_blank"
+                              >
+                                {address.value}
+                              </a>
+                            </li>
+                            <li className="italic">
+                              {/* todo: what side */}
+                              parking: on adjacent streets, alternate side
+                            </li>
+                          </>
                         )}
                         <li className="italic font-bold">doors open at 7:30, music 8-11</li>
                         {rsvp?.message && (
