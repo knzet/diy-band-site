@@ -48,7 +48,7 @@ export default function RSVP() {
               <Card className="bg-slate-200">
                 <div className="flex flex-col items-center justify-center">
                   <p className="py-4 text-center text-2xl font-bold">
-                    RSVP for the Rochester house show on 9/30
+                    RSVP for the Rochester house show on 9/30<br />Capacity reached for this show.
                   </p>
                   <RSVPForm />
                   <Image
@@ -147,7 +147,7 @@ export default function RSVP() {
           </div>
         )}
       </div>
-    </main>
+    </main >
   );
 }
 
