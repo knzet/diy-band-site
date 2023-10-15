@@ -48,13 +48,13 @@ export default function RSVP() {
               <Card className="bg-slate-200">
                 <div className="flex flex-col items-center justify-center">
                   <p className="py-4 text-center text-2xl font-bold">
-                    RSVP for the Rochester house show on 9/30<br />Capacity reached for this show.
+                    RSVP for the Rochester house show on 11/4
                   </p>
                   <RSVPForm />
                   <Image
                     className="pt-2"
                     src="/images/poster.png"
-                    alt="Safety Break logo"
+                    alt="Show Poster"
                   />
                 </div>
               </Card>
@@ -64,7 +64,7 @@ export default function RSVP() {
                   <Card className="bg-[#57ff62]">
                     <div className="flex flex-col items-center justify-center">
                       <p className="text-center text-2xl font-bold mb-2">
-                        See you on Saturday! Show this page at the door for entry.
+                        See you on Saturday 11/4! Show this page at the door for entry.
                       </p>
                       <ul>
                         <li>name: {rsvp?.name}{rsvp?.guests > 1 && ' + '.concat((rsvp?.guests - 1).toString()).concat(' guests')}</li>
@@ -137,7 +137,7 @@ export default function RSVP() {
                       <Image
                         className="pt-2"
                         src="/images/poster.png"
-                        alt="Safety Break logo"
+                        alt="Show Poster"
                       />
                     </div>
                   </Card>
