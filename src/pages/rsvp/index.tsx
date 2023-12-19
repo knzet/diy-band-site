@@ -52,6 +52,11 @@ export default function RSVP() {
                   </p>
                   <RSVPForm />
                   <Image
+                        className="pt-2"
+                        src="/images/altposter.jpg"
+                        alt="Show Poster"
+                      />
+                  <Image
                     className="pt-2"
                     src="/images/poster.png"
                     alt="Show Poster"
@@ -134,6 +139,11 @@ export default function RSVP() {
                         your RSVP is pending approval. check back later for more
                         info
                       </p>
+                      <Image
+                        className="pt-2"
+                        src="/images/altposter.jpg"
+                        alt="Show Poster"
+                      />
                       <Image
                         className="pt-2"
                         src="/images/poster.png"
