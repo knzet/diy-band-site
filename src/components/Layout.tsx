@@ -7,7 +7,7 @@ import { DoubleNavbar } from "./Navbar";
 import { Navbar } from "@mantine/core";
 import { HeaderMiddle as Header } from "./Header";
 import { api } from "~/utils/api";
-export const siteTitle = "Safety Break";
+export const siteTitle = "BANDNAME_HERE";
 
 export default function Layout({
   children,
